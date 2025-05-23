@@ -19,7 +19,7 @@ export default function AddTaskModal({ onClose }) {
       Id: crypto.randomUUID(),
       title,
       desc,
-      status:"Pending",
+      Status:"Pending",
       dueDate
     });
     onClose();
