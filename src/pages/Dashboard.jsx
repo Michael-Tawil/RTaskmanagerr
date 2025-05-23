@@ -10,7 +10,7 @@ export default function Dashboard ({searchQuery}){
     const [ismodal, setIsmodal] = useState(false)
 
     const filteredTasks = searchQuery ? tasks.filter((task)=>task.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        task.desc.toLowerCase().includes(searchQuery.toLowerCase())) : tasks
+        task.desc.toLowerCase().includes(searchQuery.toLowerCase()) || task.Status.toLowerCase().includes(searchQuery.toLowerCase())) : tasks
 
 
     if(tasks.length === 0){
