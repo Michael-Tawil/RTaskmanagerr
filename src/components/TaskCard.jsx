@@ -1,13 +1,15 @@
 import Button from "./ui/Button"
-export default function TaskCard({ttitle,tdesc,deltask,mrkdone,iKey}){
+export default function TaskCard({ttitle,tdesc,deltask,mrkdone,dueDate,status}){
     return(
         <div>
-            <h3>{ttitle}</h3>
-            <p>{tdesc}</p>
+            <h3>Title: {ttitle}</h3>
+            <p>Info: {tdesc}</p>
+            <p>Due Date: {dueDate}</p>
+            <p>Status: {status}</p>
             <Button onClick={deltask}
              children={"Delete"}/>
             <Button onClick={mrkdone}
-            children={"Mark Done"}/>
+            children={status === "Pending"? "Done" : "Pending"}/>
         </div>
     )
 }

@@ -12,6 +12,7 @@ export default function Dashboard ({searchQuery}){
     const filteredTasks = searchQuery ? tasks.filter((task)=>task.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
         task.desc.toLowerCase().includes(searchQuery.toLowerCase())) : tasks
 
+
     if(tasks.length === 0){
         return(
         
@@ -28,6 +29,8 @@ export default function Dashboard ({searchQuery}){
                 key={item.Id}
                 ttitle={item.title}
                 tdesc={item.desc}
+                dueDate={item.dueDate}
+                status={item.Status}
                 deltask={()=> rmTask(item.Id)}
                 mrkdone={()=> mrkTask(item.Id)}
             />))}

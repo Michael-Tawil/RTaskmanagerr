@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 export default function AddTaskModal({ onClose }) {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [dueDate, setdueDate] = useState("");
+
 
   const {addTask} = useTaskStore();
 
@@ -17,7 +19,8 @@ export default function AddTaskModal({ onClose }) {
       Id: crypto.randomUUID(),
       title,
       desc,
-      done: false,
+      status:"Pending",
+      dueDate
     });
     onClose();
     toast.success('Task added!');
@@ -38,6 +41,11 @@ export default function AddTaskModal({ onClose }) {
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
           placeholder="Description"
+        />
+        <Input
+        type="date"
+        value={dueDate}
+        onChange={e=>setdueDate(e.target.value)}
         />
         <div className="flex justify-end gap-4">
           <Button onClick={handleSubmit} 
