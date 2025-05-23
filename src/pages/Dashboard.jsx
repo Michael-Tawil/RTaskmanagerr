@@ -3,6 +3,8 @@ import TaskCard from "../components/TaskCard";
 import { useState } from "react";
 import AddTaskModal from "../components/ui/Modal";
 import Button from "../components/ui/Button";
+import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
 
 export default function Dashboard ({searchQuery}){
 
@@ -18,6 +20,12 @@ export default function Dashboard ({searchQuery}){
         const da = new Date(a.dueDate), db = new Date(b.dueDate);
         return sortOrder==="asc" ? da - db : db - da
     }) : filteredTasks
+
+    const getTasksForDate = (date) =>
+    tasks.filter(
+      (t) =>
+        new Date(t.dueDate).toDateString() === date.toDateString()
+    );
 
     if(tasks.length === 0){
         return(
@@ -50,6 +58,20 @@ export default function Dashboard ({searchQuery}){
                     children={"Add Task"}/>
 
             {ismodal && <AddTaskModal onClose={() => setIsmodal(false)} />}
+            <Calendar 
+            tileContent={({ date, view }) =>
+        view === 'month' && getTasksForDate(date).length > 0 ? (
+          <div className="mt-1 flex justify-center">
+            {/* simple dot indicator */}
+            <span className="w-2 h-2 bg-blue-600 rounded-full" />
+          </div>
+        ) : null
+      }
+      tileClassName={({ date, view }) =>
+        view === 'month' && getTasksForDate(date).length > 0
+          ? 'bg-blue-100'
+          : null
+      }/>
         </>
     )
 }
