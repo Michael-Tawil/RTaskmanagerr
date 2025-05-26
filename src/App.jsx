@@ -6,12 +6,13 @@ import { ToastContainer } from "react-toastify"
 function App() {
 
   const [searchQuery,setSearchQuery] = useState("")
+  const [view, setView] = useState("list")
 
   return (
     <>
     <ToastContainer position="top-right" autoClose={2000}/>
-    <Navbar searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-    <Dashboard searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+    <Navbar view={view} setView={setView} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
+    <Dashboard view={view} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
     </>
   )
 }
