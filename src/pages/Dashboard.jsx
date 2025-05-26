@@ -32,6 +32,9 @@ export default function Dashboard({ searchQuery,view }) {
 
       <div className="p-6 text-center text-gray-500">
         🎉 No tasks yet—click “+” to add your first one!
+        <Button onClick={() => setIsmodal(true)}
+            children={"Add Task"} />
+            {ismodal && <AddTaskModal onClose={() => setIsmodal(false)} />}
       </div>
     )
   }
@@ -62,19 +65,21 @@ export default function Dashboard({ searchQuery,view }) {
       ) : (
         <Calendar
 
-          onClickDay={()=>{setIsmodal(true)}}
+          onClickDay={(date)=>{
+            if(getTasksForDate(date).length > 0){
+              const temptask = getTasksForDate(date)
+              alert(temptask[0].title)
+            }else{
+              setIsmodal(true)
+            }
+          }}
           tileContent={({ date, view }) =>
             view === 'month' && getTasksForDate(date).length > 0 ? (
               <div className="mt-1 flex justify-center">
-                <span className="w-2 h-2 bg-blue-600 rounded-full" />
+                <span className="w-2 h-2 bg-red-600 rounded-full" />
               </div>
             ) : null
-          }
-          tileClassName={({ date, view }) =>
-            view === 'month' && getTasksForDate(date).length > 0
-              ? 'bg-blue-100'
-              : null
-          } />
+          }/>
         )
       }
       {ismodal && <AddTaskModal onClose={() => setIsmodal(false)} />}

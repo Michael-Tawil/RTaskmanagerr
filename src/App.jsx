@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-    <ToastContainer position="top-right" autoClose={2000}/>
+    <ToastContainer position="top-right" autoClose={500}/>
     <Navbar view={view} setView={setView} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
     <Dashboard view={view} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
     </>
