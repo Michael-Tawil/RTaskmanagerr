@@ -3,7 +3,7 @@ import Input from "./ui/Input"
 export default function Navbar({searchQuery, setSearchQuery, setView}){
     return(
         <nav className="bg-white shadow-md border-b border-gray-100 sticky top-0 z-50">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="flex justify-between items-center h-16 gap-4">
                     {/* Logo/Brand */}
                     <div className="flex-shrink-0">
@@ -13,7 +13,7 @@ export default function Navbar({searchQuery, setSearchQuery, setView}){
                     </div>
 
                     {/* Search Section */}
-                    <div className="flex-1 max-w-md mx-4">
+                    <div className="flex-1 max-w-xs mx-auto sm:max-w-md sm:mx-4">
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -34,10 +34,10 @@ export default function Navbar({searchQuery, setSearchQuery, setView}){
                         <div className="relative">
                             <select 
                                 onChange={e => setView(e.target.value)}
-                                className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 cursor-pointer"
+                                className="appearance-none bg-white border border-gray-300 rounded-lg px-2 py-2 text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 cursor-pointer"
                             >
-                                <option value="list">📋 List View</option>
-                                <option value="cal">📅 Calendar View</option>
+                                <option value="list"> List View</option>
+                                <option value="cal"> Calendar View</option>
                             </select>
                             {/* Custom dropdown arrow */}
                             <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">

@@ -7,12 +7,12 @@ const useTaskStore = create((set)=>({
     addTask: (task)=>set((state)=>({
         tasks: [...state.tasks,task]
     })),
-    rmTask: (id)=>set((state)=>{
+    removeTask: (id)=>set((state)=>{
         const newtasks = state.tasks.filter(task => task.Id !== id)
         toast.error("Task removed");
         return { tasks: newtasks };
     }),
-    mrkTask: (id)=>set((state)=>({
+    toggleTask: (id)=>set((state)=>({
         tasks: state.tasks.map((task)=>
             task.Id === id ? {...task,Status: task.Status === "Pending" ? "Done" : "Pending"}:task
         )

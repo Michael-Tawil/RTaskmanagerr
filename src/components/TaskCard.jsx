@@ -1,6 +1,6 @@
 import Button from "./ui/Button"
 
-export default function TaskCard({ttitle, tdesc, deltask, mrkdone, dueDate, status}) {
+export default function TaskCard({title, description, deleteTask, toggleTask, dueDate, status}) {
     const isCompleted = status !== "Pending";
     
     return(
@@ -9,7 +9,7 @@ export default function TaskCard({ttitle, tdesc, deltask, mrkdone, dueDate, stat
             <div className="p-6 pb-4">
                 <div className="flex items-start justify-between mb-3">
                     <h3 className={`text-xl font-semibold text-gray-800 leading-tight ${isCompleted ? 'line-through text-gray-500' : ''}`}>
-                        {ttitle}
+                        {title}
                     </h3>
                     <span className={`px-2 py-1 text-xs font-medium rounded-full ${
                         isCompleted 
@@ -21,7 +21,7 @@ export default function TaskCard({ttitle, tdesc, deltask, mrkdone, dueDate, stat
                 </div>
                 
                 <p className={`text-gray-600 text-sm mb-4 leading-relaxed ${isCompleted ? 'line-through opacity-60' : ''}`}>
-                    {tdesc}
+                    {description}
                 </p>
                 
                 <div className="flex items-center text-sm text-gray-500 mb-4">
@@ -36,14 +36,14 @@ export default function TaskCard({ttitle, tdesc, deltask, mrkdone, dueDate, stat
             {/* Action buttons */}
             <div className="px-6 pb-6 pt-2 flex gap-3 mt-auto">
                 <Button 
-                    onClick={mrkdone}
+                    onClick={toggleTask}
                     className={`flex-1 ${isCompleted ? 'bg-gray-500 hover:bg-gray-600' : 'bg-blue-500 hover:bg-blue-600'} text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200`}
                 >
                     {status === "Pending" ? "Mark Done" : "Mark Pending"}
                 </Button>
                 
                 <Button 
-                    onClick={deltask}
+                    onClick={deleteTask}
                     className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
                 >
                     <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

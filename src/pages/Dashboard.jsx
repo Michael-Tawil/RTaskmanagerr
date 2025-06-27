@@ -8,7 +8,7 @@ import 'react-calendar/dist/Calendar.css';
 
 export default function Dashboard({ searchQuery,view }) {
 
-  const { tasks, rmTask, mrkTask } = useTaskStore();
+  const { tasks, removeTask, toggleTask } = useTaskStore();
   const [ismodal, setIsmodal] = useState(false)
   const [sortOrder, setsortOrder] = useState("")
   
@@ -82,12 +82,12 @@ export default function Dashboard({ searchQuery,view }) {
               sortedtasks.map((item) => (
                 <TaskCard
                   key={item.Id}
-                  ttitle={item.title}
-                  tdesc={item.desc}
+                  title={item.title}
+                  description={item.desc}
                   dueDate={item.dueDate}
                   status={item.Status}
-                  deltask={() => rmTask(item.Id)}
-                  mrkdone={() => mrkTask(item.Id)}
+                  deleteTask={() => removeTask(item.Id)}
+                  toggleTask={() => toggleTask(item.Id)}
                 />
               ))
             ) : (
