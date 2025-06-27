@@ -118,13 +118,6 @@ src/
 - Touch-friendly interactions
 - Adaptive navigation
 
-## 🔧 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-
 ## 📈 Future Enhancements
 
 - [ ] Task categories and tags
@@ -134,25 +127,10 @@ src/
 - [ ] Dark mode theme
 - [ ] Drag and drop reordering
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👤 Author
 
 **Michael Tawil**
 
-## 🙏 Acknowledgments
+## Live Deployment
 
-- React team for the amazing framework
-- Zustand for simplified state management
-- Tailwind CSS for utility-first styling
-- All open source contributors who made this project possible
+https://tiny-alfajores-159531.netlify.app/
