@@ -9,7 +9,7 @@ import 'react-calendar/dist/Calendar.css';
 export default function Dashboard({ searchQuery,view }) {
 
   const { tasks, removeTask, toggleTask } = useTaskStore();
-  const [ismodal, setIsmodal] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [sortOrder, setsortOrder] = useState("")
   
 
@@ -29,39 +29,55 @@ export default function Dashboard({ searchQuery,view }) {
 
   if (tasks.length === 0) {
     return (
-
-      <div className="p-6 text-center text-gray-500">
-        🎉 No tasks yet—click “+” to add your first one!
-        <Button onClick={() => setIsmodal(true)}
-            children={"Add Task"} />
-            {ismodal && <AddTaskModal onClose={() => setIsmodal(false)} />}
+      <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
+  <div className="max-w-md mx-auto text-center">
+    <div className="bg-white rounded-xl shadow-md p-8 sm:p-12">
+      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
       </div>
+      <h3 className="text-lg font-semibold text-gray-800 mb-2">No tasks yet</h3>
+      <p className="text-gray-600 mb-6">Get started by creating your first task!</p>
+      <Button 
+        onClick={() => setIsModalOpen(true)}
+        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+      >
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+        </svg>
+        Add Your First Task
+      </Button>
+    </div>
+    {isModalOpen && <AddTaskModal onClose={() => setIsModalOpen(false)} />}
+  </div>
+</div>
     )
   }
 
   return (
   <div className="min-h-screen bg-gray-50">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-8">
       {view === "list" ? (
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Header Section */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="bg-white rounded-xl shadow-md border border-gray-100 p-4 sm:p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-1">My Tasks</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">My Tasks</h2>
                 <p className="text-sm text-gray-600">Manage and organize your daily tasks</p>
               </div>
               
               {/* Sort Dropdown */}
               <div className="flex items-center gap-2">
-                <span className="text-sm font-medium text-gray-700 whitespace-nowrap">Sort by:</span>
-                <div className="relative">
+<span className="text-sm font-medium text-gray-700 hidden sm:inline">Sort by:</span>
+                <div className="relative flex-1 sm:flex-none">
                   <select 
                     value={sortOrder}
                     onChange={e => setsortOrder(e.target.value)}
-                    className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-10 text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 cursor-pointer min-w-[140px]"
+                    className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-10 text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 cursor-pointer w-full sm:min-w-[140px]"
                   >
-                    <option disabled value="">Select option</option>
+                    <option disabled value="">Sort tasks</option>
                     <option value="asc">📅 Due Date ↑</option>
                     <option value="desc">📅 Due Date ↓</option>
                   </select>
@@ -77,7 +93,7 @@ export default function Dashboard({ searchQuery,view }) {
           </div>
 
           {/* Tasks Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {sortedtasks.length > 0 ? (
               sortedtasks.map((item) => (
                 <TaskCard
@@ -106,7 +122,7 @@ export default function Dashboard({ searchQuery,view }) {
           {/* Add Task Button */}
           <div className="flex justify-center pt-4">
             <Button 
-              onClick={() => setIsmodal(true)}
+              onClick={() => setIsModalOpen(true)}
               className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2 shadow-md hover:shadow-lg"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,13 +134,13 @@ export default function Dashboard({ searchQuery,view }) {
         </div>
       ) : (
         /* Calendar View */
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Calendar Header */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
-            <div className="flex items-center justify-between">
+          <div className="bg-white rounded-xl shadow-md border border-gray-100 p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-1">Calendar View</h2>
-                <p className="text-sm text-gray-600">Click on dates to view or add tasks</p>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">Calendar View</h2>
+                <p className="text-sm text-gray-600">Tap dates to view or add tasks</p>
               </div>
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <span className="w-3 h-3 bg-blue-500 rounded-full"></span>
@@ -134,7 +150,7 @@ export default function Dashboard({ searchQuery,view }) {
           </div>
 
           {/* Calendar Container */}
-          <div className="bg-white rounded-xl shadow-md border border-gray-100 p-6">
+          <div className="bg-white rounded-xl shadow-md border border-gray-100 p-4 sm:p-6">
             <Calendar
               className="w-full mx-auto"
               onClickDay={(date) => {
@@ -142,7 +158,7 @@ export default function Dashboard({ searchQuery,view }) {
                   const temptask = getTasksForDate(date)[0]
                   alert(temptask.title)
                 } else {
-                  setIsmodal(true)
+                  setIsModalOpen(true)
                 }
               }}
               tileContent={({ date, view }) =>
@@ -164,10 +180,10 @@ export default function Dashboard({ searchQuery,view }) {
       )}
       
       {/* Modal */}
-      {ismodal && (
+      {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
-            <AddTaskModal onClose={() => setIsmodal(false)} />
+            <AddTaskModal onClose={() => setIsModalOpen(false)} />
           </div>
         </div>
       )}
