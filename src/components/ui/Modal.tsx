@@ -4,18 +4,19 @@ import Button from "./Button";
 import Input from "./Input";
 import Textarea from "./Textarea";
 import { toast } from "react-toastify";
+import { ModalProps,FormErrors,TaskStatus } from "../../types";
 
-export default function AddTaskModal({ onClose }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [errors, setErrors] = useState({});
+const AddTaskModal: React.FC<ModalProps> = ({ onClose }) => {
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [dueDate, setDueDate] = useState<string>("");
+  const [errors, setErrors] = useState<FormErrors>({});
 
   const { addTask } = useTaskStore();
 
-  const handleSubmit = () => {
+  const handleSubmit = ():void => {
     // Simple validation
-    const newErrors = {};
+    const newErrors: FormErrors={};
     
     if (!title.trim()) {
       newErrors.title = "Task title is required";
@@ -37,7 +38,7 @@ export default function AddTaskModal({ onClose }) {
       Id: crypto.randomUUID(),
       title: title.trim(),
       desc: description.trim(),
-      Status: "Pending",
+      Status: TaskStatus.PENDING,
       dueDate
     });
     
@@ -46,14 +47,14 @@ export default function AddTaskModal({ onClose }) {
   };
 
   // Clear error when user starts typing
-  const handleTitleChange = (e) => {
+  const handleTitleChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
     setTitle(e.target.value);
     if (errors.title) {
       setErrors(prev => ({ ...prev, title: "" }));
     }
   };
 
-  const handleDueDateChange = (e) => {
+  const handleDueDateChange = (e:React.ChangeEvent<HTMLInputElement>):void => {
     setDueDate(e.target.value);
     if (errors.dueDate) {
       setErrors(prev => ({ ...prev, dueDate: "" }));
@@ -155,3 +156,4 @@ export default function AddTaskModal({ onClose }) {
     </div>
   );
 }
+export default AddTaskModal

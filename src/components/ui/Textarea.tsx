@@ -1,11 +1,12 @@
-export default function Textarea({
+import { TextareaProps } from "../../types";
+const Textarea: React.FC<TextareaProps> = ({
   value,
   onChange,
   placeholder = '',
   rows = 4,
   className = '',
   ...rest
-}) {
+}) => {
   return (
     <textarea
       value={value}
@@ -17,3 +18,4 @@ export default function Textarea({
     />
   );
 }
+export default Textarea

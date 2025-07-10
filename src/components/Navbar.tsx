@@ -1,6 +1,7 @@
 import Input from "./ui/Input"
+import { NavBarProps } from "../types"
 
-export default function Navbar({searchQuery, setSearchQuery, setView}){
+const Navbar:React.FC<NavBarProps> = ({searchQuery, setSearchQuery, setView})=>{
     return(
         <nav className="x-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center sm:h-16">
@@ -14,11 +15,11 @@ export default function Navbar({searchQuery, setSearchQuery, setView}){
                     </div>
                     <div className="sm:hidden">
     <select 
-        onChange={e => setView(e.target.value)}
+        onChange={e => setView(e.target.value as "list" | "calendar")}
         className="appearance-none bg-white border border-gray-300 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 cursor-pointer"
     >
         <option value="list">📋 List</option>
-        <option value="cal">📅 Calendar</option>
+        <option value="calendar">📅 Calendar</option>
     </select>
 </div>
 </div>
@@ -43,7 +44,7 @@ export default function Navbar({searchQuery, setSearchQuery, setView}){
                     <div className="hidden sm:block flex-shrink-0">
                         <div className="relative">
                             <select 
-                                onChange={e => setView(e.target.value)}
+                                onChange={e => setView(e.target.value as "list" | "calendar")}
                                 className="appearance-none bg-white border border-gray-300 rounded-lg px-2 py-2 text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 cursor-pointer"
                             >
                                 <option value="list">📋 List View</option>
@@ -67,3 +68,4 @@ export default function Navbar({searchQuery, setSearchQuery, setView}){
         </nav>
     )
 }
+export default Navbar

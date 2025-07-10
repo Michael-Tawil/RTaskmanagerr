@@ -5,23 +5,26 @@ import AddTaskModal from "../components/ui/Modal";
 import Button from "../components/ui/Button";
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
+import { DashboardProps,Task } from "../types";
 
-export default function Dashboard({ searchQuery,view }) {
+type SortOrder = "" | "asc" | "desc";
+
+const Dashboard:React.FC<DashboardProps> =({ searchQuery,view }) =>{
 
   const { tasks, removeTask, toggleTask } = useTaskStore();
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [sortOrder, setsortOrder] = useState("")
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [sortOrder, setsortOrder] = useState<SortOrder>("")
   
 
-  const filteredTasks = searchQuery ? tasks.filter((task) => task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  const filteredTasks:Task[] = searchQuery ? tasks.filter((task) => task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     task.desc.toLowerCase().includes(searchQuery.toLowerCase()) || task.Status.toLowerCase().includes(searchQuery.toLowerCase())) : tasks
 
-  const sortedtasks = sortOrder ? filteredTasks.slice().sort((a, b) => {
-    const da = new Date(a.dueDate), db = new Date(b.dueDate);
-    return sortOrder === "asc" ? da - db : db - da
+  const sortedtasks:Task[] = sortOrder ? filteredTasks.slice().sort((a, b) => {
+    const dateA = new Date(a.dueDate), dateB = new Date(b.dueDate);
+    return sortOrder === "asc" ? dateA.getTime() - dateB.getTime() : dateB.getTime()- dateA.getTime()
   }) : filteredTasks
 
-  const getTasksForDate = (date) =>
+  const getTasksForDate = (date:Date):Task[] =>
     tasks.filter(
       (t) =>
         new Date(t.dueDate).toDateString() === date.toDateString()
@@ -74,7 +77,7 @@ export default function Dashboard({ searchQuery,view }) {
                 <div className="relative flex-1 sm:flex-none">
                   <select 
                     value={sortOrder}
-                    onChange={e => setsortOrder(e.target.value)}
+                    onChange={e => setsortOrder(e.target.value as SortOrder)}
                     className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-10 text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 cursor-pointer w-full sm:min-w-[140px]"
                   >
                     <option disabled value="">Sort tasks</option>
@@ -98,12 +101,9 @@ export default function Dashboard({ searchQuery,view }) {
               sortedtasks.map((item) => (
                 <TaskCard
                   key={item.Id}
-                  title={item.title}
-                  description={item.desc}
-                  dueDate={item.dueDate}
-                  status={item.Status}
-                  deleteTask={() => removeTask(item.Id)}
-                  toggleTask={() => toggleTask(item.Id)}
+                  task={item}
+                  onRemove={removeTask}
+                  onToggle={toggleTask}
                 />
               ))
             ) : (
@@ -191,3 +191,4 @@ export default function Dashboard({ searchQuery,view }) {
   </div>
 )
 }
+export default Dashboard

@@ -1,11 +1,13 @@
-export default function Input({
+import { InputProps } from "../../types";
+
+const Input: React.FC<InputProps>=({
   type = 'text',
   value,
   onChange,
   placeholder = '',
   className = '',
   ...rest
-}) {
+}) => {
   return (
     <input
       type={type}
@@ -17,3 +19,4 @@ export default function Input({
     />
   );
 }
+export default Input

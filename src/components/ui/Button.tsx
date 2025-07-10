@@ -1,16 +1,21 @@
-export default function Button({children,
+import { ButtonProps } from "../../types"
+
+const Button: React.FC<ButtonProps> = ({children,
   onClick,
   type = 'button',
   className = '',
-  disabled = false,}){
+  disabled = false,
+  ...rest})=>{
 
     return(
         <button
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={className}>
+            className={className}
+            {...rest}>
       {children}
         </button>
     )
   }
+  export default Button
