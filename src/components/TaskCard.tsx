@@ -37,14 +37,14 @@ const TaskCard: React.FC<TaskCardProps> = ({task, onRemove, onToggle}) => {
             {/* Action buttons */}
             <div className="px-6 pb-6 pt-2 flex gap-3 mt-auto">
                 <Button 
-                    onClick={()=>onRemove(task.Id)}
+                    onClick={()=>onToggle(task.Id)}
                     className={`flex-1 ${isCompleted ? 'bg-gray-500 hover:bg-gray-600' : 'bg-blue-500 hover:bg-blue-600'} text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200`}
                 >
                     {status === "Pending" ? "Mark Done" : "Mark Pending"}
                 </Button>
                 
                 <Button 
-                    onClick={()=>onToggle(task.Id)}
+                    onClick={()=>onRemove(task.Id)}
                     className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
                 >
                     <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
